@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B805B8423683F0E00291A3A /* TCPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B805B8323683F0E00291A3A /* TCPClient.m */; };
+		2B805BA12369342500291A3A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBECC0C23631F1900CB2945 /* main.m */; };
+		2B805BA32369347100291A3A /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2BBECC1A2366DAAE00CB2945 /* Shaders.metal */; };
 		2BBECBFC23631F1800CB2945 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBECBFB23631F1800CB2945 /* AppDelegate.m */; };
 		2BBECC0223631F1800CB2945 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBECC0123631F1800CB2945 /* ViewController.m */; };
 		2BBECC0723631F1900CB2945 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BBECC0623631F1900CB2945 /* Assets.xcassets */; };
@@ -14,12 +17,14 @@
 		2BBECC152366D86900CB2945 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BBECC142366D86900CB2945 /* Metal.framework */; };
 		2BBECC172366D87000CB2945 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BBECC162366D87000CB2945 /* MetalKit.framework */; };
 		2BBECC192366D87700CB2945 /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BBECC182366D87700CB2945 /* ARKit.framework */; };
-		2BBECC2A2366DAE500CB2945 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2BBECC202366DAE500CB2945 /* Shaders.metal */; };
-		2BBECC2C2366DAE500CB2945 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBECC242366DAE500CB2945 /* main.m */; };
 		2BBECC312367285600CB2945 /* MTKRender.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBECC302367285600CB2945 /* MTKRender.m */; };
+		64E05142020CE63768A483C9 /* Pods_Rigger_ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6208B7DA8B947006DDFF0357 /* Pods_Rigger_ARKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B805B8223683EFD00291A3A /* TCPClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCPClient.h; sourceTree = "<group>"; };
+		2B805B8323683F0E00291A3A /* TCPClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCPClient.m; sourceTree = "<group>"; };
+		2B805BA22369346D00291A3A /* ShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
 		2BBECBF723631F1800CB2945 /* Rigger_ARKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rigger_ARKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBECBFA23631F1800CB2945 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2BBECBFB23631F1800CB2945 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -33,18 +38,11 @@
 		2BBECC162366D87000CB2945 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		2BBECC182366D87700CB2945 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
 		2BBECC1A2366DAAE00CB2945 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
-		2BBECC1D2366DAE500CB2945 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		2BBECC1E2366DAE500CB2945 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2BBECC1F2366DAE500CB2945 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		2BBECC202366DAE500CB2945 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
-		2BBECC222366DAE500CB2945 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		2BBECC232366DAE500CB2945 /* ShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
-		2BBECC242366DAE500CB2945 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2BBECC252366DAE500CB2945 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2BBECC262366DAE500CB2945 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2BBECC272366DAE500CB2945 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		2BBECC2F2367284400CB2945 /* MTKRender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTKRender.h; sourceTree = "<group>"; };
 		2BBECC302367285600CB2945 /* MTKRender.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MTKRender.m; sourceTree = "<group>"; };
+		6208B7DA8B947006DDFF0357 /* Pods_Rigger_ARKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rigger_ARKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DC2A73D8C581C4C2173D15F /* Pods-Rigger_ARKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rigger_ARKit.release.xcconfig"; path = "Target Support Files/Pods-Rigger_ARKit/Pods-Rigger_ARKit.release.xcconfig"; sourceTree = "<group>"; };
+		F74D1443F6268E787298E94A /* Pods-Rigger_ARKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rigger_ARKit.debug.xcconfig"; path = "Target Support Files/Pods-Rigger_ARKit/Pods-Rigger_ARKit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +53,7 @@
 				2BBECC192366D87700CB2945 /* ARKit.framework in Frameworks */,
 				2BBECC152366D86900CB2945 /* Metal.framework in Frameworks */,
 				2BBECC172366D87000CB2945 /* MetalKit.framework in Frameworks */,
+				64E05142020CE63768A483C9 /* Pods_Rigger_ARKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +66,7 @@
 				2BBECBF923631F1800CB2945 /* Rigger_ARKit */,
 				2BBECBF823631F1800CB2945 /* Products */,
 				2BBECC132366D86900CB2945 /* Frameworks */,
+				2C8C0F0413F38F476175DA82 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,12 +81,14 @@
 		2BBECBF923631F1800CB2945 /* Rigger_ARKit */ = {
 			isa = PBXGroup;
 			children = (
-				2BBECC1C2366DAE500CB2945 /* Rigger_ARKit */,
+				2B805BA22369346D00291A3A /* ShaderTypes.h */,
 				2BBECC1A2366DAAE00CB2945 /* Shaders.metal */,
 				2BBECBFA23631F1800CB2945 /* AppDelegate.h */,
 				2BBECBFB23631F1800CB2945 /* AppDelegate.m */,
 				2BBECC0023631F1800CB2945 /* ViewController.h */,
 				2BBECC0123631F1800CB2945 /* ViewController.m */,
+				2B805B8223683EFD00291A3A /* TCPClient.h */,
+				2B805B8323683F0E00291A3A /* TCPClient.m */,
 				2BBECC2F2367284400CB2945 /* MTKRender.h */,
 				2BBECC302367285600CB2945 /* MTKRender.m */,
 				2BBECC0623631F1900CB2945 /* Assets.xcassets */,
@@ -103,25 +105,18 @@
 				2BBECC182366D87700CB2945 /* ARKit.framework */,
 				2BBECC162366D87000CB2945 /* MetalKit.framework */,
 				2BBECC142366D86900CB2945 /* Metal.framework */,
+				6208B7DA8B947006DDFF0357 /* Pods_Rigger_ARKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		2BBECC1C2366DAE500CB2945 /* Rigger_ARKit */ = {
+		2C8C0F0413F38F476175DA82 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2BBECC1D2366DAE500CB2945 /* AppDelegate.h */,
-				2BBECC1E2366DAE500CB2945 /* Assets.xcassets */,
-				2BBECC1F2366DAE500CB2945 /* ViewController.m */,
-				2BBECC202366DAE500CB2945 /* Shaders.metal */,
-				2BBECC212366DAE500CB2945 /* LaunchScreen.storyboard */,
-				2BBECC232366DAE500CB2945 /* ShaderTypes.h */,
-				2BBECC242366DAE500CB2945 /* main.m */,
-				2BBECC252366DAE500CB2945 /* AppDelegate.m */,
-				2BBECC262366DAE500CB2945 /* Info.plist */,
-				2BBECC272366DAE500CB2945 /* ViewController.h */,
+				F74D1443F6268E787298E94A /* Pods-Rigger_ARKit.debug.xcconfig */,
+				6DC2A73D8C581C4C2173D15F /* Pods-Rigger_ARKit.release.xcconfig */,
 			);
-			name = Rigger_ARKit;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,9 +126,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2BBECC1023631F1900CB2945 /* Build configuration list for PBXNativeTarget "Rigger_ARKit" */;
 			buildPhases = (
+				5F053397ADE92F0A4A05D574 /* [CP] Check Pods Manifest.lock */,
 				2BBECBF323631F1800CB2945 /* Sources */,
 				2BBECBF423631F1800CB2945 /* Frameworks */,
 				2BBECBF523631F1800CB2945 /* Resources */,
+				72EB6DE035ABF74E8BD0CE62 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -188,16 +185,59 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5F053397ADE92F0A4A05D574 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Rigger_ARKit-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		72EB6DE035ABF74E8BD0CE62 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rigger_ARKit/Pods-Rigger_ARKit-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rigger_ARKit/Pods-Rigger_ARKit-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Rigger_ARKit/Pods-Rigger_ARKit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2BBECBF323631F1800CB2945 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BBECC2A2366DAE500CB2945 /* Shaders.metal in Sources */,
+				2B805BA32369347100291A3A /* Shaders.metal in Sources */,
+				2B805BA12369342500291A3A /* main.m in Sources */,
+				2B805B8423683F0E00291A3A /* TCPClient.m in Sources */,
 				2BBECC312367285600CB2945 /* MTKRender.m in Sources */,
 				2BBECC0223631F1800CB2945 /* ViewController.m in Sources */,
 				2BBECBFC23631F1800CB2945 /* AppDelegate.m in Sources */,
-				2BBECC2C2366DAE500CB2945 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,14 +248,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				2BBECC0923631F1900CB2945 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		2BBECC212366DAE500CB2945 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2BBECC222366DAE500CB2945 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -335,15 +367,19 @@
 		};
 		2BBECC1123631F1900CB2945 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F74D1443F6268E787298E94A /* Pods-Rigger_ARKit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K85WX7H8DU;
+				ENABLE_BITCODE = YES;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Rigger_ARKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = yang6wolf.Rigger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -352,15 +388,19 @@
 		};
 		2BBECC1223631F1900CB2945 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6DC2A73D8C581C4C2173D15F /* Pods-Rigger_ARKit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K85WX7H8DU;
+				ENABLE_BITCODE = YES;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Rigger_ARKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = yang6wolf.Rigger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
