@@ -20,11 +20,11 @@
 
 @property (nonatomic, strong) MTKRender *render;
 
-//@property (nonatomic, strong) TCPClient *tcpClient;
-
 @property (nonatomic, strong) GCDAsyncSocket *tcpClient;
 
-@property (nonatomic, assign) NSInteger tampCount;
+@property (nonatomic, assign) float32_t starTime;
+
+@property (nonatomic, assign) int32_t frameCount;
 
 @end
 
@@ -42,15 +42,13 @@
     self.render = [[MTKRender alloc] init];
     [self.view addSubview: self.render.view];
     self.render.view.frame = CGRectMake(0, 100, 300, 400);
-    
-//    self.tcpClient = [[TCPClient alloc] init];
-//    BOOL bConnected = [self.tcpClient connectHost:@"10.60.129.66" port:9000];
-//    NSLog(@"Connect to server:%d", bConnected);
+
     
     self.tcpClient = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     NSError *error = nil;
     [self.tcpClient connectToHost:@"10.60.129.66" onPort:9000 error:&error];
 //    [self.tcpClient connectToHost:@"10.60.107.200" onPort:9000 error:&error];
+//    [self.tcpClient connectToHost:@"10.60.130.183" onPort:9000 error:&error];
     NSLog(@"%@", error.localizedDescription);
 }
 
@@ -121,15 +119,20 @@
         pFloat++;
     }
 
-    simd_float4 oritation = QuaternionFromMatrix(faceAnchor.transform);
-    oritation[2] = 0-oritation[2];
-//    oritation[3] = 0-oritation[3];
+    simd_float4 orientation = QuaternionFromMatrix(faceAnchor.transform);
+    orientation[2] = 0-orientation[2];
+//    orientation[3] = 0-orientation[3];
     for (NSInteger nIndex=0; nIndex<4; nIndex++) {
-        *pFloat = oritation[nIndex];
+        *pFloat = orientation[nIndex];
         pFloat++;
     }
     
     
+    int32_t *pFrameIndex = (int32_t *)&buffer[265];
+    *pFrameIndex = self.frameCount++;
+    
+    float32_t *pTimeStamp = (float32_t *)&buffer[269];
+    *pTimeStamp = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970]-self.starTime;
     
     if (faceAnchor.isTracked) {
         buffer[max_buff_len-1]=1;
@@ -138,13 +141,8 @@
         buffer[max_buff_len-1]=0;
     }
     
+    NSLog(@"SendOrientation%f-%f-%f-%f", orientation[0], orientation[1], orientation[2], orientation[3]);
     
-    
-    
-//    faceAnchor.transform
-    
-//    NSString *strRtn = [[NSString alloc] initWithData:[NSData dataWithBytes:buffer length:274] encoding:NSUTF8StringEncoding];
-//    return strRtn;
     
     return [NSData dataWithBytes:buffer length:max_buff_len];
 }
@@ -185,7 +183,10 @@ static simd_float4 QuaternionFromMatrix(simd_float4x4 m) {
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
 {
-    NSLog(@"%@", sock);
+    NSLog(@"TCP Connected!");
+    
+    self.starTime = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970];
+    self.frameCount = 0;
 }
 
 
@@ -203,9 +204,6 @@ static simd_float4 QuaternionFromMatrix(simd_float4x4 m) {
     for (ARAnchor *curAnchor in anchors) {
         if ([curAnchor isKindOfClass:[ARFaceAnchor class]]) {
             NSData *sendData = [self dumpToData:(ARFaceAnchor *)curAnchor];
-//            if (self.tcpClient.isConnected) {
-//                [self.tcpClient sendAndRecv:strData];
-//            }
             
             if (self.tcpClient.isConnected) {
                 [self.tcpClient writeData:sendData withTimeout:-1 tag:0];

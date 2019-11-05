@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B805B8423683F0E00291A3A /* TCPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B805B8323683F0E00291A3A /* TCPClient.m */; };
 		2B805BA12369342500291A3A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBECC0C23631F1900CB2945 /* main.m */; };
 		2B805BA32369347100291A3A /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2BBECC1A2366DAAE00CB2945 /* Shaders.metal */; };
 		2BBECBFC23631F1800CB2945 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBECBFB23631F1800CB2945 /* AppDelegate.m */; };
@@ -22,8 +21,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2B805B8223683EFD00291A3A /* TCPClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCPClient.h; sourceTree = "<group>"; };
-		2B805B8323683F0E00291A3A /* TCPClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCPClient.m; sourceTree = "<group>"; };
 		2B805BA22369346D00291A3A /* ShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
 		2BBECBF723631F1800CB2945 /* Rigger_ARKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rigger_ARKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBECBFA23631F1800CB2945 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -87,8 +84,6 @@
 				2BBECBFB23631F1800CB2945 /* AppDelegate.m */,
 				2BBECC0023631F1800CB2945 /* ViewController.h */,
 				2BBECC0123631F1800CB2945 /* ViewController.m */,
-				2B805B8223683EFD00291A3A /* TCPClient.h */,
-				2B805B8323683F0E00291A3A /* TCPClient.m */,
 				2BBECC2F2367284400CB2945 /* MTKRender.h */,
 				2BBECC302367285600CB2945 /* MTKRender.m */,
 				2BBECC0623631F1900CB2945 /* Assets.xcassets */,
@@ -234,7 +229,6 @@
 			files = (
 				2B805BA32369347100291A3A /* Shaders.metal in Sources */,
 				2B805BA12369342500291A3A /* main.m in Sources */,
-				2B805B8423683F0E00291A3A /* TCPClient.m in Sources */,
 				2BBECC312367285600CB2945 /* MTKRender.m in Sources */,
 				2BBECC0223631F1800CB2945 /* ViewController.m in Sources */,
 				2BBECBFC23631F1800CB2945 /* AppDelegate.m in Sources */,
