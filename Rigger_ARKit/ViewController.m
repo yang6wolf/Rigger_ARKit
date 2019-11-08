@@ -9,6 +9,8 @@
 #import "ViewController.h"
 
 #import <ARKit/ARKit.h>
+#import <SceneKit/SceneKit.h>
+
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
 
 #import "MTKRender.h"
@@ -22,9 +24,25 @@
 
 @property (nonatomic, strong) GCDAsyncSocket *tcpClient;
 
-@property (nonatomic, assign) float32_t starTime;
+@property (nonatomic, assign) float_t starTime;
 
 @property (nonatomic, assign) int32_t frameCount;
+
+
+@property (nonatomic, strong) SCNScene *scene;
+
+@property (nonatomic, strong) SCNReferenceNode *contentNode;
+
+@property (nonatomic, strong) SCNNode *head;
+
+@property (nonatomic, strong) SCNNode *blendshapes;
+
+@property (nonatomic, strong) SCNNode *cameraNode;
+
+@property (nonatomic, strong) SCNView *faceView;
+
+
+
 
 @end
 
@@ -41,7 +59,7 @@
     
     self.render = [[MTKRender alloc] init];
     [self.view addSubview: self.render.view];
-    self.render.view.frame = CGRectMake(0, 100, 300, 400);
+    self.render.view.frame = CGRectMake(0, 0, 300, 400);
 
     
     self.tcpClient = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
@@ -50,6 +68,47 @@
 //    [self.tcpClient connectToHost:@"10.60.107.200" onPort:9000 error:&error];
 //    [self.tcpClient connectToHost:@"10.60.130.183" onPort:9000 error:&error];
     NSLog(@"%@", error.localizedDescription);
+    
+
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Sloth" ofType:@"scn" inDirectory:@"Models.scnassets"];
+    NSURL *referenceURL = [NSURL fileURLWithPath:filePath];
+    self.contentNode = [[SCNReferenceNode alloc] initWithURL:referenceURL];
+    [self.contentNode load];
+    
+    for (SCNNode *child in self.contentNode.childNodes) {
+        NSLog(@"%@", child.name);
+        if ([child.name isEqualToString:@"Head"]) {
+            self.head = child;
+        }
+    }
+    
+//    for (SCNNode *child in self.head.childNodes) {
+//        NSLog(@"%@", child.name);
+//        if ([child.name isEqualToString:@"BlendShapes"]) {
+//            self.blendshapes = child;
+//        }
+//    }
+    self.head.morpher.unifiesNormals = YES;
+    
+    
+    self.scene = [[SCNScene alloc] init];
+    [self.scene.rootNode addChildNode:self.contentNode];
+    
+    self.faceView = [[SCNView alloc] init];
+    self.faceView.autoenablesDefaultLighting = YES;
+    self.faceView.scene = self.scene;
+    self.faceView.allowsCameraControl = NO;
+    self.faceView.backgroundColor = [UIColor clearColor];
+    
+    
+    self.cameraNode =  [[SCNNode alloc] init];
+    self.cameraNode.camera = [[SCNCamera alloc] init];
+    self.cameraNode.position = SCNVector3Make(0, 0, 5);
+    [self.scene.rootNode addChildNode:self.cameraNode];
+    self.faceView.pointOfView = self.cameraNode;
+    
+    [self.view addSubview:self.faceView];
+    self.faceView.frame = CGRectMake(0, 350, 300, 400);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -131,7 +190,7 @@
     int32_t *pFrameIndex = (int32_t *)&buffer[265];
     *pFrameIndex = self.frameCount++;
     
-    float32_t *pTimeStamp = (float32_t *)&buffer[269];
+    float_t *pTimeStamp = (float_t *)&buffer[269];
     *pTimeStamp = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970]-self.starTime;
     
     if (faceAnchor.isTracked) {
@@ -201,16 +260,45 @@ static simd_float4 QuaternionFromMatrix(simd_float4x4 m) {
 }
 
 - (void)session:(ARSession *)session didUpdateAnchors:(NSArray<__kindof ARAnchor *> *)anchors {
+    NSLog(@"UpdateAnchors!!!");
     for (ARAnchor *curAnchor in anchors) {
         if ([curAnchor isKindOfClass:[ARFaceAnchor class]]) {
-            NSData *sendData = [self dumpToData:(ARFaceAnchor *)curAnchor];
+            ARFaceAnchor *faceAnchor = (ARFaceAnchor *)curAnchor;
+            NSData *sendData = [self dumpToData:faceAnchor];
             
             if (self.tcpClient.isConnected) {
                 [self.tcpClient writeData:sendData withTimeout:-1 tag:0];
             }
+            
+            
+            
+            for (NSString *key in faceAnchor.blendShapes) {
+                NSNumber *value = [faceAnchor.blendShapes objectForKey:key];
+                NSString *targetName = [NSString stringWithFormat:@"%@Mesh", key];
+                [self.head.morpher setWeight:[value floatValue] forTargetNamed:targetName];
+            }
+            
+//            self.head.simdTransform = faceAnchor.transform;
+            self.head.eulerAngles = [self calculateEulerAngles:faceAnchor withARSession:session];
         }
     }
 }
+
+- (SCNVector3)calculateEulerAngles:(ARFaceAnchor *)faceAnchor withARSession:(ARSession *)curSession {
+    simd_float4x4 projectionMatrix = [curSession.currentFrame.camera projectionMatrixForOrientation:UIInterfaceOrientationPortrait viewportSize:self.faceView.bounds.size zNear:0.001 zFar:1000];
+    simd_float4x4 viewMatrix = [curSession.currentFrame.camera viewMatrixForOrientation:UIInterfaceOrientationPortrait];
+    projectionMatrix = simd_mul(projectionMatrix, viewMatrix);
+    simd_float4x4 modelMatrix = faceAnchor.transform;
+    simd_float4x4 mvpMatrix = simd_mul(projectionMatrix, modelMatrix);
+    
+    SCNMatrix4 newFaceMatrix = SCNMatrix4FromMat4(mvpMatrix);
+    SCNNode *faceNode = [[SCNNode alloc] init];
+    faceNode.transform = newFaceMatrix;
+    
+    simd_float3 rotation = vector3(faceNode.worldOrientation.x, faceNode.worldOrientation.y, faceNode.worldOrientation.z);
+    return SCNVector3Make(rotation.x*3, rotation.y*3, rotation.z*1.5);
+}
+
 
 - (void)session:(ARSession *)session didRemoveAnchors:(NSArray<__kindof ARAnchor *> *)anchors {
     NSLog(@"didRemoveAnchors:%@", anchors);
