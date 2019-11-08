@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2B805BA12369342500291A3A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBECC0C23631F1900CB2945 /* main.m */; };
 		2B805BA32369347100291A3A /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 2BBECC1A2366DAAE00CB2945 /* Shaders.metal */; };
+		2BA308F7237453010000130E /* Models.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BA308F6237453010000130E /* Models.scnassets */; };
 		2BBECBFC23631F1800CB2945 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBECBFB23631F1800CB2945 /* AppDelegate.m */; };
 		2BBECC0223631F1800CB2945 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BBECC0123631F1800CB2945 /* ViewController.m */; };
 		2BBECC0723631F1900CB2945 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BBECC0623631F1900CB2945 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		2B805BA22369346D00291A3A /* ShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
+		2BA308F6237453010000130E /* Models.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Models.scnassets; sourceTree = "<group>"; };
 		2BBECBF723631F1800CB2945 /* Rigger_ARKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rigger_ARKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBECBFA23631F1800CB2945 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2BBECBFB23631F1800CB2945 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				2BBECC0823631F1900CB2945 /* LaunchScreen.storyboard */,
 				2BBECC0B23631F1900CB2945 /* Info.plist */,
 				2BBECC0C23631F1900CB2945 /* main.m */,
+				2BA308F6237453010000130E /* Models.scnassets */,
 			);
 			path = Rigger_ARKit;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BA308F7237453010000130E /* Models.scnassets in Resources */,
 				2BBECC0A23631F1900CB2945 /* LaunchScreen.storyboard in Resources */,
 				2BBECC0723631F1900CB2945 /* Assets.xcassets in Resources */,
 			);
