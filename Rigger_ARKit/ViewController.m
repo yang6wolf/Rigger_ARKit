@@ -109,6 +109,7 @@
     
     [self.view addSubview:self.faceView];
     self.faceView.frame = CGRectMake(0, 350, 300, 400);
+    self.faceView.preferredFramesPerSecond = 10;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -261,6 +262,7 @@ static simd_float4 QuaternionFromMatrix(simd_float4x4 m) {
 
 - (void)session:(ARSession *)session didUpdateAnchors:(NSArray<__kindof ARAnchor *> *)anchors {
     NSLog(@"UpdateAnchors!!!");
+    
     for (ARAnchor *curAnchor in anchors) {
         if ([curAnchor isKindOfClass:[ARFaceAnchor class]]) {
             ARFaceAnchor *faceAnchor = (ARFaceAnchor *)curAnchor;
