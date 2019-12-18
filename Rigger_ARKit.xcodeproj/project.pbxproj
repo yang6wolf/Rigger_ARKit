@@ -365,10 +365,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K85WX7H8DU;
+				DEVELOPMENT_TEAM = B74CWV3V6C;
 				ENABLE_BITCODE = YES;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Rigger_ARKit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -386,10 +387,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K85WX7H8DU;
+				DEVELOPMENT_TEAM = B74CWV3V6C;
 				ENABLE_BITCODE = YES;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Rigger_ARKit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

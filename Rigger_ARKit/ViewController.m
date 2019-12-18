@@ -22,7 +22,7 @@
 
 @property (nonatomic, strong) GCDAsyncSocket *tcpClient;
 
-@property (nonatomic, assign) float32_t starTime;
+@property (nonatomic, assign) double_t starTime;
 
 @property (nonatomic, assign) int32_t frameCount;
 
@@ -46,9 +46,9 @@
     
     self.tcpClient = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     NSError *error = nil;
-    [self.tcpClient connectToHost:@"10.60.129.66" onPort:9000 error:&error];
+//    [self.tcpClient connectToHost:@"10.60.129.66" onPort:9000 error:&error];
 //    [self.tcpClient connectToHost:@"10.60.107.200" onPort:9000 error:&error];
-//    [self.tcpClient connectToHost:@"10.60.130.183" onPort:9000 error:&error];
+    [self.tcpClient connectToHost:@"10.60.130.183" onPort:9000 error:&error];
     NSLog(@"%@", error.localizedDescription);
 }
 
@@ -71,7 +71,7 @@
 }
 
 - (NSData *)dumpToData:(ARFaceAnchor *)faceAnchor {
-    const int max_buff_len = 274;
+    const int max_buff_len = 278;
     uint8_t buffer[max_buff_len];
     bzero(buffer, sizeof(buffer));
     buffer[0] = 42;
@@ -130,9 +130,12 @@
     
     int32_t *pFrameIndex = (int32_t *)&buffer[265];
     *pFrameIndex = self.frameCount++;
+    NSLog(@"当前帧号%d",*pFrameIndex);
     
-    float32_t *pTimeStamp = (float32_t *)&buffer[269];
-    *pTimeStamp = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970]-self.starTime;
+//    float32_t *pTimeStamp = (float32_t *)&buffer[269];
+    double_t *pTimeStamp=(double_t*)&buffer[269];
+    *pTimeStamp = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970]*1000-self.starTime;
+    NSLog(@"当前帧时间：%f",*pTimeStamp);
     
     if (faceAnchor.isTracked) {
         buffer[max_buff_len-1]=1;
@@ -185,7 +188,8 @@ static simd_float4 QuaternionFromMatrix(simd_float4x4 m) {
 {
     NSLog(@"TCP Connected!");
     
-    self.starTime = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970];
+    self.starTime = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970]*1000;
+    NSLog(@"开始时间：%f\n",self.starTime);
     self.frameCount = 0;
 }
 
@@ -198,14 +202,19 @@ static simd_float4 QuaternionFromMatrix(simd_float4x4 m) {
 
 - (void)session:(ARSession *)session didAddAnchors:(nonnull NSArray<__kindof ARAnchor *> *)anchors {
     NSLog(@"didAddAnchors:%@", anchors);
+//    self.starTime = [[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970]*1000;
+//    NSLog(@"开始时间：%f\n",self.starTime);
+
 }
 
 - (void)session:(ARSession *)session didUpdateAnchors:(NSArray<__kindof ARAnchor *> *)anchors {
     for (ARAnchor *curAnchor in anchors) {
         if ([curAnchor isKindOfClass:[ARFaceAnchor class]]) {
-            NSData *sendData = [self dumpToData:(ARFaceAnchor *)curAnchor];
-            
+            NSLog(@"UpdateAnchors");
+//            NSData *sendData = [self dumpToData:(ARFaceAnchor *)curAnchor];
+
             if (self.tcpClient.isConnected) {
+                NSData *sendData = [self dumpToData:(ARFaceAnchor *)curAnchor];
                 [self.tcpClient writeData:sendData withTimeout:-1 tag:0];
             }
         }
